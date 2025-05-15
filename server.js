@@ -16,7 +16,17 @@ connectCloudinary()
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+// Use this middleware to allow all origins
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
+
+// Optional: handle preflight requests (for completeness)
+app.options('*', cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 
 // api endpoints
 app.use('/api/user',userRouter)
